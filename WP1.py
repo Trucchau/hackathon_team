@@ -8,7 +8,7 @@ n = int(input("Enter n :"))
 def count_number(n):
     i = 10
     s = 1
-    while i <= 1000000:
+    while i <= 1000000000000:
         a = n // i
         if a == 0:
             sochuso = s
@@ -26,7 +26,7 @@ def read_2(N, n):
         if sothu2 == 5:
             ans = "mười lăm"
         elif sothu2 != 0:
-            ans = "mười" + N[sothu2][0]
+            ans = "mười " + N[sothu2][0]
         else:
             ans = "mười"
     else:
@@ -91,15 +91,15 @@ def read_thousand(N, n):
 def read_million(N, n):
     ans = []
     sohangtrieu = n // 1000000
-    sohangnghin = n % 1000000
+    sohangngan = n % 1000000
     if count_number(sohangtrieu) == 2:
-        ans = read_2(N, sohangtrieu) + " triệu " + read_thousand(N, sohangnghin)
+        ans = read_2(N, sohangtrieu) + " triệu " + read_thousand(N, sohangngan)
     elif count_number(sohangtrieu) == 3:
-        ans = read_3_1(N, sohangtrieu) + " triệu " + read_thousand(N, sohangnghin)
+        ans = read_3_1(N, sohangtrieu) + " triệu " + read_thousand(N, sohangngan)
     elif sohangtrieu < 10 and sohangtrieu > 0:
-        ans = N[sohangtrieu][0] + " triệu " + read_thousand(N, sohangnghin)
+        ans = N[sohangtrieu][0] + " triệu " + read_thousand(N, sohangngan)
     elif sohangtrieu == 0:
-        ans = read_thousand(N, sohangnghin)
+        ans = read_thousand(N, sohangngan)
     return ans
 
 #Đọc số hàng tỉ:
@@ -119,6 +119,12 @@ def read_billion(N, n):
 
 #Hàm tổng:
 def read_the_number(n):
+    if not isinstance(n, int):
+        raise TypeError("Not an integer.")
+    if n < 0:
+        raise ValueError("Not positive integer.")
+    if n > 999999999999:
+        raise OverflowError
     if n <= 10:
         result = N[n][0]
     elif n>10 and n <= 100:
