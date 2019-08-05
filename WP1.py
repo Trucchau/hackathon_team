@@ -1,8 +1,10 @@
 N = (["không", 0], ["một", 1], ["hai", 2], ["ba", 3], ["bốn", 4], ["năm", 5], ["sáu", 6], ["bảy", 7], ["tám", 8],
      ["chín", 9], ["mười", 10])
+
+#Nhập số n:
 n = int(input("Enter n :"))
 
-
+#Đếm số chữ số của n:
 def count_number(n):
     i = 10
     s = 1
@@ -15,7 +17,7 @@ def count_number(n):
         i *= 10
     return sochuso
 
-
+#Đọc số có 2 chữ số:
 def read_2(N, n):
     ans = []
     sodautien = n // 10
@@ -38,7 +40,7 @@ def read_2(N, n):
             ans = N[sodautien][0] + " mươi"
     return ans
 
-
+#Đọc số có 3 chữ số (trường hợp số bé hơn 1000)
 def read_3_1(N, n):
     ans = []
     sodautien = n // 100
@@ -53,7 +55,7 @@ def read_3_1(N, n):
         ans = N[sodautien][0] + " trăm " + read_2(N, sohangchuc)
     return ans
 
-
+#Đọc số có 3 chữ số (trường hợp số ở vị trí hàng trăm trong số n > 1000)
 def read_3_2(N, n):
     ans = []
     sodautien = n // 100
@@ -70,7 +72,7 @@ def read_3_2(N, n):
         ans = ""
     return ans
 
-
+#Đọc số hàng ngàn:
 def read_thousand(N, n):
     ans = []
     sohangngan = n // 1000
@@ -85,7 +87,7 @@ def read_thousand(N, n):
         ans = read_3_2(N, sohangtram)
     return ans
 
-
+#Đọc số hàng triệu:
 def read_million(N, n):
     ans = []
     sohangtrieu = n // 1000000
@@ -100,7 +102,7 @@ def read_million(N, n):
         ans = read_thousand(N, sohangnghin)
     return ans
 
-
+#Đọc số hàng tỉ:
 def read_billion(N, n):
     ans = []
     sohangty = n // 1000000000
@@ -115,5 +117,14 @@ def read_billion(N, n):
         ans = read_million(N, sohangtrieu)
     return ans
 
+#Hàm tổng:
+def read_the_number(n):
+    if n <= 10:
+        result = N[n][0]
+    elif n>10 and n <= 100:
+        result = read_2(N,n)
+    else:
+        result = read_billion(N, n)
+    return result 
 
-print(read_billion(N, n))
+print(read_the_number(n))
