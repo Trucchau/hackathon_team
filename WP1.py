@@ -62,12 +62,12 @@ def read_3_2(N, n):
     sothu3 = (n % 100) % 10
     if sodautien == 0 and sothu2 != 0:
         ans = "khong tram " + read_2(N, sohangchuc)
-    elif sodautien == 0 and sothu2 == 0:
+    elif sodautien == 0 and sothu2 == 0 and sothu3 != 0:
         ans = "khong tram linh " + N[sothu3][0]
     elif sodautien != 0:
         ans = read_3_1(N, n)
     elif sodautien == 0 and sothu2 == 0 and sothu3 == 0:
-        ans = ['']
+        ans = ""
     return ans
 
 
@@ -79,8 +79,10 @@ def read_thousand(N, n):
         ans = read_2(N, sohangngan) + " nghin " + read_3_2(N, sohangtram)
     elif count_number(sohangngan) == 3:
         ans = read_3_1(N, sohangngan) + " nghin " + read_3_2(N, sohangtram)
-    elif count_number(sohangngan) == 1:
+    elif sohangngan < 10 and sohangngan > 0:
         ans = N[sohangngan][0] + " nghin " + read_3_2(N, sohangtram)
+    elif sohangngan == 0:
+        ans = read_3_2(N, sohangtram)
     return ans
 
 
@@ -115,4 +117,3 @@ def read_billion(N, n):
 
 
 print(read_billion(N, n))
-
