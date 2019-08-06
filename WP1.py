@@ -3,6 +3,8 @@ N = (["không", 0], ["một", 1], ["hai", 2], ["ba", 3], ["bốn", 4], ["năm", 
 
 #Nhập số n:
 n = int(input("Enter n :"))
+#Nhập region:
+region = input("Enter region: ")
 
 #Đếm số chữ số của n:
 def count_number(n):
@@ -143,7 +145,7 @@ def read_billion(N, n):
     return ans
 
 #Hàm tổng:
-def integer_to_vietnamese_numeral(n):
+def integer_to_vietnamese_numeral(n, region):   
     if not isinstance(n, int):
         raise TypeError("Not an integer.")
     if n < 0:
@@ -155,7 +157,15 @@ def integer_to_vietnamese_numeral(n):
     elif n > 10 and n <= 100:
         result = read_2(N,n)
     else:
-        result = read_billion(N, n)
+        if not isinstance(region, str):
+            raise TypeError      
+        if region == 'south':
+            result1 = read_billion(N, n).replace("nghìn", "ngàn")
+            result = result1.replace("linh", "lẻ")
+        elif region == 'north' or region == '' or region == '':
+            result = read_billion(N, n)
+        else:
+            raise ValueError       
     return result 
 
-print(integer_to_vietnamese_numeral(n))
+print(integer_to_vietnamese_numeral(n, region))
